@@ -40,9 +40,12 @@ jobs:
         uses: aquasecurity/trivy-action@master
         with:
           image-ref: 'docker.io/devops-counsel/py-app:${{ github.sha }}'
-          format: 'table'
+          # format: 'table'
           vuln-type: 'os,library'
           severity: 'CRITICAL,HIGH'
+          format: 'sarif'
+          output: 'trivy-results.sarif'
+
       - name: Upload Trivy scan results to GitHub Security tab
         uses: github/codeql-action/upload-sarif@v2
         with:
