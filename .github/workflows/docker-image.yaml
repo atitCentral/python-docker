@@ -9,6 +9,8 @@ on:
   # pull_request:
   #   branches:
   #     - '*'
+permissions: write-all
+
 jobs:
   build:
     name: Build & push docker image
@@ -78,7 +80,7 @@ jobs:
         vuln-type: 'os,library'
         severity: 'CRITICAL,HIGH'
         output: 'trivy-results.sarif'
-        # exit-code: '1'
+        exit-code: '1'
         ignore-unfixed: true
 
     - name: Upload Trivy scan results to GitHub Security tab
