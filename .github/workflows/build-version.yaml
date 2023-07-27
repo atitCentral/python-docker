@@ -61,7 +61,7 @@ jobs:
       with:
         image-ref: ${{ steps.login-ecr.outputs.registry }}/${{ secrets.REPO_NAME }}:${{ steps.vars.outputs.tag }}
         # format: 'table'
-        format: 'sarif'
+        format: 'table'
         vuln-type: 'os,library'
         severity: 'CRITICAL,HIGH'
         output: 'trivy-results.sarif'
