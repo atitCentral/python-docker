@@ -66,12 +66,12 @@ jobs:
         severity: 'CRITICAL,HIGH'
         output: 'trivy-results.sarif'
         exit-code: '1'
-        ignore-unfixed: true
-    # - name: Upload Trivy scan results to GitHub Security tab
-    #   uses: github/codeql-action/upload-sarif@v2
-    #   with:
-    #     sarif_file: 'trivy-results.sarif'
-    #     category: 'image'
+        # ignore-unfixed: true
+    - name: Upload Trivy scan results to GitHub Security tab
+      uses: github/codeql-action/upload-sarif@v2
+      with:
+        sarif_file: 'trivy-results.sarif'
+        category: 'image'
     - name: Push the image to Amazon ECR
       id: push-image
       env:
