@@ -25,7 +25,7 @@ jobs:
       id: extract_branch
     - name: Get Hash
       id: hash
-      run: echo "git_hash=$(git rev-parse --short "$GITHUB_SHA")" >> $GITHUB_HASH
+      run: echo "git_hash=$(git rev-parse --short "$GITHUB_SHA")" >> $GITHUB_OUTPUT
     - name: Configure AWS credentials
       uses: aws-actions/configure-aws-credentials@v1
       with:
@@ -41,7 +41,7 @@ jobs:
         ECR_REPOSITORY: python-docker
         # git_hash=$(git rev-parse --short "$GITHUB_SHA")
         # git_branch=${GITHUB_REF#refs/heads/}
-        IMAGE_TAG: ${{ steps.extract_branch.outputs.branch }}-${{ env.hash }}
+        IMAGE_TAG: ${{ steps.extract_branch.outputs.branch }}-${{ steps.hash.outputs.git_hash }}
       run: |
         # Build a docker container and push it to ECR
         docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
